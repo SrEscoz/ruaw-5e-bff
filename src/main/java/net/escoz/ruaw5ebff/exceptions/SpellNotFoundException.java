@@ -3,10 +3,10 @@ package net.escoz.ruaw5ebff.exceptions;
 public class SpellNotFoundException extends RuntimeException {
 
 	public SpellNotFoundException(String spell) {
-		super("Could not find spell: " + spell);
+		super("No es posible encontrar el hechizo: " + spell);
 	}
 
 	public SpellNotFoundException(long id) {
-		super("Could not find spell with id: " + id);
+		super("No es posible encontrar el hechizo con id: " + id);
 	}
 }

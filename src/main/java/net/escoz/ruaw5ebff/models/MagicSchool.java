@@ -2,6 +2,7 @@ package net.escoz.ruaw5ebff.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import net.escoz.ruaw5ebff.exceptions.MagicSchoolNotFoundException;
 
 import java.util.Arrays;
 
@@ -23,7 +24,7 @@ public enum MagicSchool {
 		return Arrays.stream(MagicSchool.values())
 				.filter(school -> school.getDisplayName().equals(displayName))
 				.findFirst()
-				.orElseThrow(() -> new IllegalArgumentException("Magic school with name: " + displayName + " not found"));
+				.orElseThrow(() -> new MagicSchoolNotFoundException(displayName));
 	}
 
 }
