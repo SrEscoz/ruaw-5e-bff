@@ -42,7 +42,7 @@ public class Spell {
 
 	private Boolean ritual;
 
-	private Boolean concentrarion;
+	private Boolean concentration;
 
 	@Column(length = 4000)
 	private String highLevelsDescription;
