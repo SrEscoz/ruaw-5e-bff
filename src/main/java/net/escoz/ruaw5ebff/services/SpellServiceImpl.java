@@ -35,7 +35,7 @@ public class SpellServiceImpl implements SpellService {
 
 	@Override
 	public Spell save(Spell spell) {
-		return null;
+		return spellRepository.save(spell);
 	}
 
 	@Override

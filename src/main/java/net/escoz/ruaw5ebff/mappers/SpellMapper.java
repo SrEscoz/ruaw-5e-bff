@@ -7,6 +7,7 @@ import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 import java.util.Set;
@@ -19,10 +20,15 @@ public interface SpellMapper {
 
 	List<SpellOutDTO> toSpellOutDTOs(List<Spell> spells);
 
+	@Mapping(target = "id", ignore = true)
 	Spell toEntity(SpellInDTO spellInDTO);
 
-	default String mapMagicSchool(MagicSchool magicSchool) {
+	default String mapEnumToString(MagicSchool magicSchool) {
 		return magicSchool.getDisplayName();
+	}
+
+	default MagicSchool mapStringToEnum(String magicSchool) {
+		return MagicSchool.fromDisplayName(magicSchool);
 	}
 
 	default List<String> mapClases(Set<Class> clases) {
