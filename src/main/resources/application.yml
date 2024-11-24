@@ -1,3 +1,8 @@
+server:
+  port: 8040
+
 spring:
+  profiles:
+    active: h2
   application:
     name: RUAW-5e-bff
