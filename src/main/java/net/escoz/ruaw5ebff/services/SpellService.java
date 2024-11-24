@@ -10,6 +10,8 @@ public interface SpellService {
 
 	Spell findById(Long id);
 
+	Spell findByName(String name);
+
 	Spell save(Spell spell);
 
 	Spell update(Spell spell);
