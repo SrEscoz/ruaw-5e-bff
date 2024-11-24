@@ -1,12 +1,11 @@
 package net.escoz.ruaw5ebff.services;
 
 import lombok.AllArgsConstructor;
+import net.escoz.ruaw5ebff.exceptions.SpellNotFoundException;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.repositories.SpellRepository;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Arrays;
 import java.util.List;
@@ -25,13 +24,13 @@ public class SpellServiceImpl implements SpellService {
 	@Override
 	public Spell findById(Long id) {
 		return spellRepository.findById(id)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+				.orElseThrow(() -> new SpellNotFoundException(id));
 	}
 
 	@Override
 	public Spell findByName(String name) {
 		return spellRepository.findByName(name)
-				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+				.orElseThrow(() -> new SpellNotFoundException(name));
 	}
 
 	@Override
