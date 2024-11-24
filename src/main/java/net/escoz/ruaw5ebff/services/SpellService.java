@@ -1,6 +1,5 @@
 package net.escoz.ruaw5ebff.services;
 
-import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
 
 import java.util.List;
@@ -17,6 +16,6 @@ public interface SpellService {
 
 	void delete(Long id);
 
-	List<MagicSchool> getAllMagicSchools();
+	List<String> getAllMagicSchools();
 
 }

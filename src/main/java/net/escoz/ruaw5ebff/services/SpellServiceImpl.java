@@ -6,6 +6,7 @@ import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.repositories.SpellRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -41,7 +42,9 @@ public class SpellServiceImpl implements SpellService {
 	}
 
 	@Override
-	public List<MagicSchool> getAllMagicSchools() {
-		return List.of();
+	public List<String> getAllMagicSchools() {
+		return Arrays.stream(MagicSchool.values())
+				.map(MagicSchool::getDisplayName)
+				.toList();
 	}
 }
