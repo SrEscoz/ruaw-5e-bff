@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 public final class SpellFilterDTO {
 
 	private Integer level;
-	private String magicSchool;
+	private String school;
 	private String className;
+	private String sort = "name";
+	private String order = "asc";
 }
