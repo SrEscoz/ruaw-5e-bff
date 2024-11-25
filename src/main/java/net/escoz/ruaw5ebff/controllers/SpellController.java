@@ -3,16 +3,17 @@ package net.escoz.ruaw5ebff.controllers;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.PageOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.SpellInDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.SpellOutDTO;
 import net.escoz.ruaw5ebff.mappers.SpellMapper;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.services.SpellService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/spells")
@@ -20,36 +21,39 @@ import java.util.List;
 public class SpellController {
 
 	private final SpellService spellService;
-	private final SpellMapper spellsMapper;
+	private final SpellMapper spellMapper;
 
 	@GetMapping
-	public ResponseEntity<List<SpellOutDTO>> getSpells() {
+	public ResponseEntity<PageOutDTO<?>> getSpells(Pageable pageable) {
+		Page<Spell> spells = spellService.findSpells(pageable);
+		PageOutDTO<SpellOutDTO> response = new PageOutDTO<>(spells.map(spellMapper::toSpellOutDTO));
+
 		return ResponseEntity
 				.ok()
-				.body(spellsMapper.toSpellOutDTOs(spellService.findAll()));
+				.body(response);
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<SpellOutDTO> getSpell(@PathVariable long id) {
 		return ResponseEntity
 				.ok()
-				.body(spellsMapper.toSpellOutDTO(spellService.findById(id)));
+				.body(spellMapper.toSpellOutDTO(spellService.findById(id)));
 	}
 
 	@GetMapping("/search")
 	public ResponseEntity<SpellOutDTO> getSpellByName(@RequestParam String name) {
 		return ResponseEntity
 				.ok()
-				.body(spellsMapper.toSpellOutDTO(spellService.findByName(name)));
+				.body(spellMapper.toSpellOutDTO(spellService.findByName(name)));
 	}
 
 	@PostMapping
 	public ResponseEntity<SpellOutDTO> postSpell(@Valid @RequestBody SpellInDTO spellInDTO) {
-		Spell spell = spellsMapper.toEntity(spellInDTO);
+		Spell spell = spellMapper.toEntity(spellInDTO);
 
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
-				.body(spellsMapper.toSpellOutDTO(spellService.save(spell)));
+				.body(spellMapper.toSpellOutDTO(spellService.save(spell)));
 	}
 
 	@DeleteMapping("/{id}")

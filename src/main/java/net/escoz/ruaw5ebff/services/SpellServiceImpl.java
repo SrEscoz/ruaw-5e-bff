@@ -7,6 +7,8 @@ import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.repositories.SpellRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -20,9 +22,10 @@ public class SpellServiceImpl implements SpellService {
 	private final ClassService classService;
 	private final SpellRepository spellRepository;
 
+
 	@Override
-	public List<Spell> findAll() {
-		return spellRepository.findAll();
+	public Page<Spell> findSpells(Pageable pageable) {
+		return spellRepository.findAll(pageable);
 	}
 
 	@Override

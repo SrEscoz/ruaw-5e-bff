@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SpellInDTO {
+public final class SpellInDTO {
 
 	@NotBlank(message = "El nombre del hechizo es obligatorio")
 	@Size(max = 255, message = "El nombre no puede exceder los 255 caracteres")

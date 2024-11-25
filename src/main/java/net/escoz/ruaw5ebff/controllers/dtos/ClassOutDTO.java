@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ClassOutDTO {
+public final class ClassOutDTO {
 
 	private long id;
 	private String name;

@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class SpellOutDTO {
+public final class SpellOutDTO {
 
 	private long id;
 	private String name;
