@@ -47,6 +47,15 @@ public class SpellController {
 				.body(spellMapper.toSpellOutDTO(spellService.save(spell)));
 	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<SpellOutDTO> updateSpell(@PathVariable long id,
+	                                               @Valid @RequestBody SpellInDTO spellInDTO) {
+
+		return ResponseEntity
+				.ok()
+				.body(spellMapper.toSpellOutDTO(spellService.update(spellInDTO, id)));
+	}
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<BasicOutDTO> deleteSpell(@PathVariable long id) {
 		spellService.delete(id);

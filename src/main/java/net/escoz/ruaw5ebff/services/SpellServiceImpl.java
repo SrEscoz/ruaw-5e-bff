@@ -2,6 +2,7 @@ package net.escoz.ruaw5ebff.services;
 
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.controllers.dtos.SpellFilterDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.SpellInDTO;
 import net.escoz.ruaw5ebff.exceptions.SpellConflictException;
 import net.escoz.ruaw5ebff.exceptions.SpellNotFoundException;
 import net.escoz.ruaw5ebff.models.Class;
@@ -54,9 +55,10 @@ public class SpellServiceImpl implements SpellService {
 	}
 
 	@Override
-	public Spell update(Spell spell) {
+	public Spell update(SpellInDTO spellInDTO, long id) {
 		return null;
 	}
+
 
 	@Override
 	public void delete(long id) {
