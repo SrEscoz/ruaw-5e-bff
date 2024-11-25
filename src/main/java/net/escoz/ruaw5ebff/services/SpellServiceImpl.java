@@ -1,14 +1,17 @@
 package net.escoz.ruaw5ebff.services;
 
 import lombok.AllArgsConstructor;
+import net.escoz.ruaw5ebff.controllers.dtos.SpellFilterDTO;
 import net.escoz.ruaw5ebff.exceptions.SpellConflictException;
 import net.escoz.ruaw5ebff.exceptions.SpellNotFoundException;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.repositories.SpellRepository;
+import net.escoz.ruaw5ebff.repositories.specifications.SpellSpecification;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -22,22 +25,17 @@ public class SpellServiceImpl implements SpellService {
 	private final ClassService classService;
 	private final SpellRepository spellRepository;
 
-
 	@Override
-	public Page<Spell> findSpells(Pageable pageable) {
-		return spellRepository.findAll(pageable);
+	public Page<Spell> findSpells(Pageable pageable, SpellFilterDTO filters) {
+		Specification<Spell> spec = SpellSpecification.fromFilter(filters);
+
+		return spellRepository.findAll(spec, pageable);
 	}
 
 	@Override
 	public Spell findById(long id) {
 		return spellRepository.findById(id)
 				.orElseThrow(() -> new SpellNotFoundException(id));
-	}
-
-	@Override
-	public Spell findByName(String name) {
-		return spellRepository.findByName(name)
-				.orElseThrow(() -> new SpellNotFoundException(name));
 	}
 
 	@Override
