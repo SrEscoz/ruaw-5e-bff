@@ -10,4 +10,5 @@ public interface ClassService {
 
 	Class findByName(String name);
 
+	List<String> getClassNames();
 }

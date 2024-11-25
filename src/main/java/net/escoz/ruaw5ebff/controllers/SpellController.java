@@ -52,13 +52,6 @@ public class SpellController {
 				.body(spellsMapper.toSpellOutDTO(spellService.save(spell)));
 	}
 
-	@GetMapping("/schools")
-	public ResponseEntity<List<String>> getMagicSchools() {
-		return ResponseEntity
-				.ok()
-				.body(spellService.getAllMagicSchools());
-	}
-
 	@DeleteMapping("/{id}")
 	public ResponseEntity<BasicOutDTO> deleteSpell(@PathVariable long id) {
 		spellService.delete(id);

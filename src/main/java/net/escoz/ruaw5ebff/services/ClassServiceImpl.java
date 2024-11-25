@@ -24,4 +24,9 @@ public class ClassServiceImpl implements ClassService {
 		return classRepository.findByName(name)
 				.orElseThrow(() -> new ClassNotFoundException(name));
 	}
+
+	@Override
+	public List<String> getClassNames() {
+		return classRepository.findAllNames();
+	}
 }
