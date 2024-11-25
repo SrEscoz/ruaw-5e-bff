@@ -2,6 +2,7 @@ package net.escoz.ruaw5ebff.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.SpellInDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.SpellOutDTO;
 import net.escoz.ruaw5ebff.mappers.SpellMapper;
@@ -56,5 +57,12 @@ public class SpellController {
 		return ResponseEntity
 				.ok()
 				.body(spellService.getAllMagicSchools());
+	}
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<BasicOutDTO> deleteSpell(@PathVariable long id) {
+		spellService.delete(id);
+		return ResponseEntity
+				.ok(new BasicOutDTO(HttpStatus.OK.value(), "Hechizo eliminado satisfactoriamente"));
 	}
 }

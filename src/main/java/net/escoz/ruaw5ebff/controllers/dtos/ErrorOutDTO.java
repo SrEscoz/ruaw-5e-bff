@@ -7,5 +7,5 @@ import java.util.List;
 
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public record ErrorResponseDTO(String timestamp, int status, String error, List<String> errors) {
+public record ErrorOutDTO(String timestamp, int status, String error, List<String> errors) {
 }

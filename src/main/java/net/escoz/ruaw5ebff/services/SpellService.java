@@ -8,7 +8,7 @@ public interface SpellService {
 
 	List<Spell> findAll();
 
-	Spell findById(Long id);
+	Spell findById(long id);
 
 	Spell findByName(String name);
 
@@ -16,7 +16,7 @@ public interface SpellService {
 
 	Spell update(Spell spell);
 
-	void delete(Long id);
+	void delete(long id);
 
 	List<String> getAllMagicSchools();
 

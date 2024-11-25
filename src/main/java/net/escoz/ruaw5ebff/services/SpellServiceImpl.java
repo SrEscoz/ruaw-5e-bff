@@ -22,7 +22,7 @@ public class SpellServiceImpl implements SpellService {
 	}
 
 	@Override
-	public Spell findById(Long id) {
+	public Spell findById(long id) {
 		return spellRepository.findById(id)
 				.orElseThrow(() -> new SpellNotFoundException(id));
 	}
@@ -44,8 +44,8 @@ public class SpellServiceImpl implements SpellService {
 	}
 
 	@Override
-	public void delete(Long id) {
-
+	public void delete(long id) {
+		spellRepository.delete(findById(id));
 	}
 
 	@Override

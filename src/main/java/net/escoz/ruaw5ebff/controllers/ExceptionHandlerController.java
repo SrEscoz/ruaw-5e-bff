@@ -1,6 +1,6 @@
 package net.escoz.ruaw5ebff.controllers;
 
-import net.escoz.ruaw5ebff.controllers.dtos.ErrorResponseDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.ErrorOutDTO;
 import net.escoz.ruaw5ebff.exceptions.MagicSchoolNotFoundException;
 import net.escoz.ruaw5ebff.exceptions.SpellNotFoundException;
 import org.springframework.http.HttpHeaders;
@@ -21,8 +21,8 @@ import java.time.Instant;
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(value = {SpellNotFoundException.class, MagicSchoolNotFoundException.class})
-	protected ResponseEntity<ErrorResponseDTO> handleNotFoundExceptions(Exception exception) {
-		ErrorResponseDTO response = ErrorResponseDTO.builder()
+	protected ResponseEntity<ErrorOutDTO> handleNotFoundExceptions(Exception exception) {
+		ErrorOutDTO response = ErrorOutDTO.builder()
 				.timestamp(Instant.now().toString())
 				.status(HttpStatus.NOT_FOUND.value())
 				.error(exception.getMessage())
@@ -39,7 +39,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 	                                                              @NonNull HttpStatusCode status,
 	                                                              @NonNull WebRequest request) {
 
-		ErrorResponseDTO response = ErrorResponseDTO.builder()
+		ErrorOutDTO response = ErrorOutDTO.builder()
 				.timestamp(Instant.now().toString())
 				.status(HttpStatus.BAD_REQUEST.value())
 				.errors(exception.getBindingResult().getAllErrors().stream()
