@@ -2,10 +2,7 @@ package net.escoz.ruaw5ebff.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
-import net.escoz.ruaw5ebff.controllers.dtos.PageOutDTO;
-import net.escoz.ruaw5ebff.controllers.dtos.SpellInDTO;
-import net.escoz.ruaw5ebff.controllers.dtos.SpellOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.*;
 import net.escoz.ruaw5ebff.mappers.SpellMapper;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.services.SpellService;
@@ -24,8 +21,10 @@ public class SpellController {
 	private final SpellMapper spellMapper;
 
 	@GetMapping
-	public ResponseEntity<PageOutDTO<?>> getSpells(Pageable pageable) {
-		Page<Spell> spells = spellService.findSpells(pageable);
+	public ResponseEntity<PageOutDTO<?>> getSpells(SpellFilterDTO filters,
+	                                               Pageable pageable) {
+
+		Page<Spell> spells = spellService.findSpells(pageable, filters);
 		PageOutDTO<SpellOutDTO> response = new PageOutDTO<>(spells.map(spellMapper::toSpellOutDTO));
 
 		return ResponseEntity
@@ -38,13 +37,6 @@ public class SpellController {
 		return ResponseEntity
 				.ok()
 				.body(spellMapper.toSpellOutDTO(spellService.findById(id)));
-	}
-
-	@GetMapping("/search")
-	public ResponseEntity<SpellOutDTO> getSpellByName(@RequestParam String name) {
-		return ResponseEntity
-				.ok()
-				.body(spellMapper.toSpellOutDTO(spellService.findByName(name)));
 	}
 
 	@PostMapping
