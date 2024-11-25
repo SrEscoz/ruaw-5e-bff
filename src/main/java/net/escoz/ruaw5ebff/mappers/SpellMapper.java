@@ -31,7 +31,18 @@ public interface SpellMapper {
 		return MagicSchool.fromDisplayName(magicSchool);
 	}
 
-	default List<String> mapClases(Set<Class> clases) {
+	default List<String> mapClasses(Set<Class> clases) {
 		return clases.stream().map(Class::getName).collect(Collectors.toList());
+	}
+
+	default Set<Class> mapClasses(List<String> clases) {
+		return clases.stream()
+				.map(c -> {
+					Class magicClass = new Class();
+					magicClass.setName(c);
+					return magicClass;
+
+				})
+				.collect(Collectors.toSet());
 	}
 }

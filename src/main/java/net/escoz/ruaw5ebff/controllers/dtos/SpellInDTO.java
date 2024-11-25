@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -51,4 +53,6 @@ public class SpellInDTO {
 
 	@NotBlank(message = "La fuente es obligatoria")
 	private String source;
+
+	private List<String> classes;
 }
