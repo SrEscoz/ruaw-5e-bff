@@ -5,6 +5,7 @@ import net.escoz.ruaw5ebff.controllers.dtos.SpellFilterDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.SpellInDTO;
 import net.escoz.ruaw5ebff.exceptions.SpellConflictException;
 import net.escoz.ruaw5ebff.exceptions.SpellNotFoundException;
+import net.escoz.ruaw5ebff.mappers.SpellMapper;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
@@ -25,6 +26,7 @@ public class SpellServiceImpl implements SpellService {
 
 	private final ClassService classService;
 	private final SpellRepository spellRepository;
+	private final SpellMapper spellMapper;
 
 	@Override
 	public Page<Spell> findSpells(Pageable pageable, SpellFilterDTO filters) {
@@ -56,7 +58,22 @@ public class SpellServiceImpl implements SpellService {
 
 	@Override
 	public Spell update(SpellInDTO spellInDTO, long id) {
-		return null;
+		Spell spell = findById(id);
+
+		// Comprobamos la duplicidad del nombre ignorando el propio hechizo para evitar conflictos con el mismo
+		if (!spell.getName().equalsIgnoreCase(spellInDTO.getName())
+				&& spellRepository.existsByNameAndIdNot(spellInDTO.getName(), id)) {
+			throw new SpellConflictException(spellInDTO.getName());
+		}
+
+		List<Class> classes = spellInDTO.getClasses().stream()
+				.map(classService::findByName)
+				.toList();
+
+		spell = spellMapper.updateSpell(spell, spellInDTO);
+		spell.setClasses(new LinkedHashSet<>(classes));
+
+		return spellRepository.save(spell);
 	}
 
 

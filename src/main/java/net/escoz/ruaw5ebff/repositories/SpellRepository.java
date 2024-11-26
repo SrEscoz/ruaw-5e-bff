@@ -10,4 +10,6 @@ import java.util.Optional;
 @Repository
 public interface SpellRepository extends JpaRepository<Spell, Long>, JpaSpecificationExecutor<Spell> {
 	Optional<Spell> findByName(String name);
+
+	boolean existsByNameAndIdNot(String name, Long id);
 }

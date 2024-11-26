@@ -23,6 +23,7 @@ public interface SpellMapper {
 	Spell toEntity(SpellInDTO spellInDTO);
 
 	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "classes", ignore = true) // Se va a hacer a mano en el servicio
 	Spell updateSpell(@MappingTarget Spell originalSpell, SpellInDTO spell);
 
 	default String mapEnumToString(MagicSchool magicSchool) {

@@ -19,6 +19,7 @@ public class ClassController {
 	private final ClassService classService;
 	private final ClassMapper classMapper;
 
+	@Deprecated
 	@GetMapping
 	public ResponseEntity<List<ClassOutDTO>> getClasses() {
 		return ResponseEntity
