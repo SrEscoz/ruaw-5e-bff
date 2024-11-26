@@ -20,7 +20,12 @@ public class Class {
 	@Column(unique = true, nullable = false)
 	private String name;
 
+	@OrderBy("name ASC")
 	@ManyToMany(mappedBy = "classes")
 	private Set<Spell> spells = new LinkedHashSet<>();
+
+	@OrderBy("level ASC")
+	@OneToMany(mappedBy = "clazz", orphanRemoval = true)
+	private Set<ClassLevel> classLevels = new LinkedHashSet<>();
 
 }

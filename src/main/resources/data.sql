@@ -71,3 +71,105 @@ INSERT INTO spells_classes (spell_id, class_id) VALUES (12, 1); -- Rayo en Caden
 INSERT INTO spells_classes (spell_id, class_id) VALUES (13, 1); -- Piedra de Fuego con Mago
 INSERT INTO spells_classes (spell_id, class_id) VALUES (14, 1); -- Llama Eterna con Mago
 INSERT INTO spells_classes (spell_id, class_id) VALUES (15, 1); -- Llamado del Guardián con Mago
+
+
+-- Inserts para los niveles del Clérigo
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 1, 2, 3, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 1
+INSERT INTO spell_slots (class_level_id, spell_level, slots)
+VALUES (1, 2, 1);
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 2, 2, 3, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 2
+INSERT INTO spell_slots (class_level_id, spell_level, slots)
+VALUES (1, 3, 1);
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 3, 2, 3, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 3
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 4, 2, 4, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 4
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 5, 3, 4, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 5
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 6, 3, 4, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 6
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 7, 3, 4, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 7
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 8, 3, 4, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 8
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 9, 4, 4, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 9
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 10, 4, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 10
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 11, 4, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 11
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 12, 4, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 12
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 13, 5, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 13
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 14, 5, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 14
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 15, 5, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 15
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 16, 5, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 16
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 17, 6, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 17
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 18, 6, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 18
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 19, 6, 5, NULL);
+-- Agregar características según sea necesario
+-- Agregar espacios de conjuro para el nivel 19
+
+INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
+VALUES (2, 20, 6, 5, NULL); -- Agregar características según sea necesario
