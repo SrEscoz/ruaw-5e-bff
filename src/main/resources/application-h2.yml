@@ -14,3 +14,5 @@ spring:
   sql:
     init:
       mode: always
+ruaw:
+  allowed-origin: http://localhost:4200
