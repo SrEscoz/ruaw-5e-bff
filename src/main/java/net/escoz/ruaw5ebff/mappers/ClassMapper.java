@@ -16,8 +16,6 @@ public interface ClassMapper {
 
 	ClassOutDTO toClassOutDTO(Class clazz);
 
-	List<ClassOutDTO> toClassOutDTOs(List<Class> classes);
-
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "name", target = "name")

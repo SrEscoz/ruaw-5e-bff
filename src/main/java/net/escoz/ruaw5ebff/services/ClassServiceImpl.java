@@ -15,8 +15,9 @@ public class ClassServiceImpl implements ClassService {
 	private final ClassRepository classRepository;
 
 	@Override
-	public List<Class> findAll() {
-		return classRepository.findAll();
+	public Class findClass(Long id) {
+		return classRepository.findById(id)
+				.orElseThrow(() -> new ClassNotFoundException(id));
 	}
 
 	@Override

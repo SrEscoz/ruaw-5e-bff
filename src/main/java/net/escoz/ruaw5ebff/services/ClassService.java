@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ClassService {
 
-	List<Class> findAll();
+	Class findClass(Long id);
 
 	Class findByName(String name);
 

@@ -23,8 +23,8 @@ public final class SpellOutDTO {
 	private String components;
 	private String materials;
 	private String duration;
-	private boolean ritual;
-	private boolean concentration;
+	private Boolean ritual;
+	private Boolean concentration;
 	private String highLevelsDescription;
 	private String source;
 	private List<String> classes;
