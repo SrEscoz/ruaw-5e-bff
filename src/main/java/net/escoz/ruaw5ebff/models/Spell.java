@@ -30,6 +30,7 @@ public class Spell {
 
 	private String castingTime;
 
+	@Column(name = "spell_range")
 	private String range;
 
 	@Column(length = 10)
