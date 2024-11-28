@@ -6,7 +6,6 @@ import net.escoz.ruaw5ebff.controllers.dtos.SpellInDTO;
 import net.escoz.ruaw5ebff.exceptions.SpellConflictException;
 import net.escoz.ruaw5ebff.exceptions.SpellNotFoundException;
 import net.escoz.ruaw5ebff.mappers.SpellMapper;
-import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.repositories.SpellRepository;
@@ -17,14 +16,12 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 @Service
 @AllArgsConstructor
 public class SpellServiceImpl implements SpellService {
 
-	private final ClassService classService;
 	private final SpellRepository spellRepository;
 	private final SpellMapper spellMapper;
 
@@ -48,11 +45,6 @@ public class SpellServiceImpl implements SpellService {
 					throw new SpellConflictException(spell.getName());
 				});
 
-		List<Class> classes = spell.getClasses().stream()
-				.map(c -> classService.findByName(c.getName()))
-				.toList();
-		spell.setClasses(new LinkedHashSet<>(classes));
-
 		return spellRepository.save(spell);
 	}
 
@@ -66,12 +58,7 @@ public class SpellServiceImpl implements SpellService {
 			throw new SpellConflictException(spellInDTO.getName());
 		}
 
-		List<Class> classes = spellInDTO.getClasses().stream()
-				.map(classService::findByName)
-				.toList();
-
 		spell = spellMapper.updateSpell(spell, spellInDTO);
-		spell.setClasses(new LinkedHashSet<>(classes));
 
 		return spellRepository.save(spell);
 	}

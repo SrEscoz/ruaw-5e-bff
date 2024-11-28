@@ -6,6 +6,7 @@ import net.escoz.ruaw5ebff.controllers.dtos.SpellOutDTO;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
+import net.escoz.ruaw5ebff.services.ClassService;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -14,7 +15,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = ClassService.class)
 public interface SpellMapper {
 
 	SpellOutDTO toSpellOutDTO(Spell spell);
@@ -23,7 +24,6 @@ public interface SpellMapper {
 	Spell toEntity(SpellInDTO spellInDTO);
 
 	@Mapping(target = "id", ignore = true)
-	@Mapping(target = "classes", ignore = true) // Se va a hacer a mano en el servicio
 	Spell updateSpell(@MappingTarget Spell originalSpell, SpellInDTO spell);
 
 	default String mapEnumToString(MagicSchool magicSchool) {
@@ -36,16 +36,5 @@ public interface SpellMapper {
 
 	default List<String> mapClasses(Set<Class> clases) {
 		return clases.stream().map(Class::getName).collect(Collectors.toList());
-	}
-
-	default Set<Class> mapClasses(List<String> clases) {
-		return clases.stream()
-				.map(c -> {
-					Class magicClass = new Class();
-					magicClass.setName(c);
-					return magicClass;
-
-				})
-				.collect(Collectors.toSet());
 	}
 }
