@@ -6,8 +6,6 @@ import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.repositories.ClassRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
 public class ClassServiceImpl implements ClassService {
@@ -26,8 +24,4 @@ public class ClassServiceImpl implements ClassService {
 				.orElseThrow(() -> new ClassNotFoundException(name));
 	}
 
-	@Override
-	public List<String> getClassNames() {
-		return classRepository.findAllNames();
-	}
 }

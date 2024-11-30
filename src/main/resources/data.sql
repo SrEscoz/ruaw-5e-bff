@@ -173,3 +173,15 @@ VALUES (2, 19, 6, 5, NULL);
 
 INSERT INTO class_levels (class_id, level, proficiency_bonus, known_cantrips, features)
 VALUES (2, 20, 6, 5, NULL); -- Agregar características según sea necesario
+
+INSERT INTO source_books (title) VALUES
+('Manual del Jugador'),
+('Guía del Dungeon Master'),
+('Manual de Monstruos'),
+('El Caldero de Todo de Tasha'),
+('Guía de Todo de Xanathar'),
+('Guía de Monstruos de Volo'),
+('Tomo de los Enemigos de Mordenkainen'),
+('Guía de Aventuras de la Costa de la Espada'),
+('Tesoro de Dragones de Fizban'),
+('Fantasmas de Saltmarsh');
