@@ -7,7 +7,7 @@ import java.util.Set;
 public class Utils {
 
 	private static final Set<String> EXCLUDED_WORDS = new HashSet<>(Arrays.asList(
-			"de", "con", "y", "o", "en", "el", "la", "los", "las", "del", "al"
+			"de", "con", "y", "o", "en", "el", "la", "los", "las", "del", "al", "que", "te"
 	));
 
 	public static String sanitizeName(String input) {
