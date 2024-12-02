@@ -9,6 +9,7 @@ import net.escoz.ruaw5ebff.mappers.SpellMapper;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.repositories.SpellRepository;
 import net.escoz.ruaw5ebff.repositories.specifications.SpellSpecification;
+import net.escoz.ruaw5ebff.utils.Utils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -50,7 +51,7 @@ public class SpellServiceImpl implements SpellService {
 
 		// Comprobamos la duplicidad del nombre ignorando el propio hechizo para evitar conflictos con el mismo
 		if (!spell.getName().equalsIgnoreCase(spellInDTO.getName())
-				&& spellRepository.existsByNameAndIdNot(spellInDTO.getName(), id)) {
+				&& spellRepository.existsByNameAndIdNot(Utils.sanitizeName(spellInDTO.getName()), id)) {
 			throw new SpellConflictException(spellInDTO.getName());
 		}
 
