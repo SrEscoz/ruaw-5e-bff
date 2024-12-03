@@ -24,7 +24,7 @@ public class SpellController {
 
 	@GetMapping
 	public ResponseEntity<PageOutDTO<?>> getSpells(SpellFilterDTO filters,
-	                                               @PageableDefault(sort = {"name"}, direction = Sort.Direction.ASC)
+	                                               @PageableDefault(sort = {"name"}, direction = Sort.Direction.ASC, size = 20)
 	                                               Pageable pageable) {
 
 		Page<Spell> spells = spellService.findSpells(pageable, filters);
