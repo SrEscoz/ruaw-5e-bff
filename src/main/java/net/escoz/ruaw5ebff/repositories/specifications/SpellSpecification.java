@@ -1,15 +1,11 @@
 package net.escoz.ruaw5ebff.repositories.specifications;
 
 import jakarta.persistence.criteria.Join;
-import jakarta.persistence.criteria.Order;
 import net.escoz.ruaw5ebff.controllers.dtos.SpellFilterDTO;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
 import org.springframework.data.jpa.domain.Specification;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SpellSpecification {
 
@@ -17,8 +13,7 @@ public class SpellSpecification {
 		return Specification
 				.where(withLevel(filter.getLevel()))
 				.and(withSchool(filter.getSchool()))
-				.and(withClass(filter.getClassName()))
-				.and(withOrderBy(filter));
+				.and(withClass(filter.getClassName()));
 	}
 
 	private static Specification<Spell> withLevel(Integer level) {
@@ -52,38 +47,6 @@ public class SpellSpecification {
 					criteriaBuilder.lower(classes.get("name")),
 					className.toLowerCase()
 			);
-		};
-	}
-
-	private static Specification<Spell> withOrderBy(SpellFilterDTO filter) {
-		return (root, query, criteriaBuilder) -> {
-			List<Order> orders = new ArrayList<>();
-
-			if (filter.getSort() != null && !filter.getSort().isEmpty()) {
-				String sortBy = filter.getSort().toLowerCase();
-				String sortDirection = filter.getOrder();
-
-				if ("name".equals(sortBy)) {
-					orders.add("desc".equalsIgnoreCase(sortDirection) ?
-							criteriaBuilder.desc(root.get("name")) :
-							criteriaBuilder.asc(root.get("name")));
-				}
-
-				if ("level".equals(sortBy)) {
-					orders.add("desc".equalsIgnoreCase(sortDirection) ?
-							criteriaBuilder.desc(root.get("level")) :
-							criteriaBuilder.asc(root.get("level")));
-				}
-			}
-
-			if (orders.isEmpty()) {
-				return criteriaBuilder.conjunction(); // Sin orden, aplicamos una conjunción vacía
-			}
-
-			assert query != null;
-			query.orderBy(orders);
-
-			return criteriaBuilder.conjunction();
 		};
 	}
 }

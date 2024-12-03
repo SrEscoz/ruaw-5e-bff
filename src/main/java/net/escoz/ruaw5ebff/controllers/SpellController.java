@@ -8,6 +8,8 @@ import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.services.SpellService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,9 @@ public class SpellController {
 	private final SpellMapper spellMapper;
 
 	@GetMapping
-	public ResponseEntity<PageOutDTO<?>> getSpells(SpellFilterDTO filters, Pageable pageable) {
+	public ResponseEntity<PageOutDTO<?>> getSpells(SpellFilterDTO filters,
+	                                               @PageableDefault(sort = {"name"}, direction = Sort.Direction.ASC)
+	                                               Pageable pageable) {
 
 		Page<Spell> spells = spellService.findSpells(pageable, filters);
 		PageOutDTO<SpellOutDTO> response = new PageOutDTO<>(spells.map(spellMapper::toSpellOutDTO));
