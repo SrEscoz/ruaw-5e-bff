@@ -12,10 +12,10 @@ public interface SpellService {
 
 	Spell findById(long id);
 
-	Spell save(Spell spell);
+	Spell saveSpell(Spell spell);
 
-	Spell update(SpellInDTO spellInDTO, long id);
+	Spell updateSpell(SpellInDTO spellInDTO, long id);
 
-	void delete(long id);
+	void deleteSpell(long id);
 
 }

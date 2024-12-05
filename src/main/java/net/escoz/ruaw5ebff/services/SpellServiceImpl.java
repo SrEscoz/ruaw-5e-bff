@@ -36,7 +36,7 @@ public class SpellServiceImpl implements SpellService {
 	}
 
 	@Override
-	public Spell save(Spell spell) {
+	public Spell saveSpell(Spell spell) {
 		spellRepository.findByName(spell.getName())
 				.ifPresent(s -> {
 					throw new SpellConflictException(spell.getName());
@@ -46,7 +46,7 @@ public class SpellServiceImpl implements SpellService {
 	}
 
 	@Override
-	public Spell update(SpellInDTO spellInDTO, long id) {
+	public Spell updateSpell(SpellInDTO spellInDTO, long id) {
 		Spell spell = findById(id);
 
 		// Comprobamos la duplicidad del nombre ignorando el propio hechizo para evitar conflictos con el mismo
@@ -62,7 +62,7 @@ public class SpellServiceImpl implements SpellService {
 
 
 	@Override
-	public void delete(long id) {
+	public void deleteSpell(long id) {
 		spellRepository.delete(findById(id));
 	}
 }

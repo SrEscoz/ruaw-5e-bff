@@ -18,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/spells")
 @AllArgsConstructor
@@ -46,13 +48,19 @@ public class SpellController {
 				.body(spellMapper.toSpellOutDTO(spellService.findById(id)));
 	}
 
+	@GetMapping("/class/{id}")
+	public ResponseEntity<List<SpellOutDTO>> getClassSpells(@PathVariable long id) {
+
+		return null;
+	}
+
 	@PostMapping
 	public ResponseEntity<SpellOutDTO> postSpell(@Valid @RequestBody SpellInDTO spellInDTO) {
 		Spell spell = spellMapper.toEntity(spellInDTO);
 
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
-				.body(spellMapper.toSpellOutDTO(spellService.save(spell)));
+				.body(spellMapper.toSpellOutDTO(spellService.saveSpell(spell)));
 	}
 
 	@PutMapping("/{id}")
@@ -61,12 +69,12 @@ public class SpellController {
 
 		return ResponseEntity
 				.ok()
-				.body(spellMapper.toSpellOutDTO(spellService.update(spellInDTO, id)));
+				.body(spellMapper.toSpellOutDTO(spellService.updateSpell(spellInDTO, id)));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<BasicOutDTO> deleteSpell(@PathVariable long id) {
-		spellService.delete(id);
+		spellService.deleteSpell(id);
 		return ResponseEntity
 				.ok(new BasicOutDTO(HttpStatus.OK.value(), "Hechizo eliminado satisfactoriamente"));
 	}
