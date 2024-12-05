@@ -1,6 +1,7 @@
 package net.escoz.ruaw5ebff.services;
 
 import lombok.AllArgsConstructor;
+import net.escoz.ruaw5ebff.exceptions.ClassConflictException;
 import net.escoz.ruaw5ebff.exceptions.ClassNotFoundException;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.repositories.ClassRepository;
@@ -29,6 +30,16 @@ public class ClassServiceImpl implements ClassService {
 	public Class findByName(String name) {
 		return classRepository.findByName(name)
 				.orElseThrow(() -> new ClassNotFoundException(name));
+	}
+
+	@Override
+	public Class addClass(Class clazz) {
+		classRepository.findByName(clazz.getName())
+				.ifPresent(s -> {
+					throw new ClassConflictException(clazz.getName());
+				});
+
+		return classRepository.save(clazz);
 	}
 
 	@Override

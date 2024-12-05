@@ -1,10 +1,13 @@
 package net.escoz.ruaw5ebff.controllers;
 
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassInDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassMinOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassOutDTO;
 import net.escoz.ruaw5ebff.mappers.ClassMapper;
+import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.services.ClassService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,6 +40,15 @@ public class ClassController {
 		return ResponseEntity
 				.ok()
 				.body(classMapper.toClassOutDTO(classService.findClass(id)));
+	}
+
+	@PostMapping
+	public ResponseEntity<ClassOutDTO> addClass(@Valid @RequestBody ClassInDTO classInDTO) {
+		Class clazz = classMapper.toEntity(classInDTO);
+
+		return ResponseEntity
+				.status(HttpStatus.CREATED)
+				.body(classMapper.toClassOutDTO(classService.addClass(clazz)));
 	}
 
 	@DeleteMapping("/{id}")

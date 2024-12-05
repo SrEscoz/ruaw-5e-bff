@@ -1,10 +1,8 @@
 package net.escoz.ruaw5ebff.controllers;
 
 import net.escoz.ruaw5ebff.controllers.dtos.ErrorOutDTO;
+import net.escoz.ruaw5ebff.exceptions.*;
 import net.escoz.ruaw5ebff.exceptions.ClassNotFoundException;
-import net.escoz.ruaw5ebff.exceptions.MagicSchoolNotFoundException;
-import net.escoz.ruaw5ebff.exceptions.SpellConflictException;
-import net.escoz.ruaw5ebff.exceptions.SpellNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -31,7 +29,7 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 		return buildResponse(exception.getMessage(), HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(value = {SpellConflictException.class})
+	@ExceptionHandler(value = {SpellConflictException.class, ClassConflictException.class})
 	protected ResponseEntity<ErrorOutDTO> handleConflictExceptions(Exception exception) {
 		return buildResponse(exception.getMessage(), HttpStatus.CONFLICT);
 	}
