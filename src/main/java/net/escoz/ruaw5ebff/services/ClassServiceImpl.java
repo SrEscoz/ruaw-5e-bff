@@ -31,4 +31,13 @@ public class ClassServiceImpl implements ClassService {
 				.orElseThrow(() -> new ClassNotFoundException(name));
 	}
 
+	@Override
+	public void deleteClass(long id) {
+		Class clazz = findClass(id);
+		clazz.getSpells().forEach(spell -> spell.getClasses().remove(clazz));
+		clazz.getSpells().clear();
+
+		classRepository.delete(clazz);
+	}
+
 }

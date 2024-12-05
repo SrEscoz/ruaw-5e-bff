@@ -12,4 +12,5 @@ public interface ClassService {
 
 	Class findByName(String name);
 
+	void deleteClass(long id);
 }

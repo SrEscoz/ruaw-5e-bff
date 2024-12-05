@@ -1,15 +1,14 @@
 package net.escoz.ruaw5ebff.controllers;
 
 import lombok.AllArgsConstructor;
+import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassMinOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassOutDTO;
 import net.escoz.ruaw5ebff.mappers.ClassMapper;
 import net.escoz.ruaw5ebff.services.ClassService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,4 +39,11 @@ public class ClassController {
 				.body(classMapper.toClassOutDTO(classService.findClass(id)));
 	}
 
+	@DeleteMapping("/{id}")
+	public ResponseEntity<BasicOutDTO> deleteClass(@PathVariable long id) {
+		classService.deleteClass(id);
+
+		return ResponseEntity
+				.ok(new BasicOutDTO(HttpStatus.OK.value(), "Clase eliminada satisfactoriamente"));
+	}
 }
