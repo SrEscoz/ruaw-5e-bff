@@ -6,6 +6,7 @@ import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassInDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassMinOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassSpellInDTO;
 import net.escoz.ruaw5ebff.mappers.ClassMapper;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.services.ClassService;
@@ -36,7 +37,7 @@ public class ClassController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ClassOutDTO> getClass(@PathVariable Long id) {
+	public ResponseEntity<ClassOutDTO> getClass(@PathVariable long id) {
 		return ResponseEntity
 				.ok()
 				.body(classMapper.toClassOutDTO(classService.findClass(id)));
@@ -52,12 +53,21 @@ public class ClassController {
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<ClassOutDTO> updateClass(@PathVariable Long id,
+	public ResponseEntity<ClassOutDTO> updateClass(@PathVariable long id,
 	                                               @Valid @RequestBody ClassInDTO classInDTO) {
 
 		return ResponseEntity
 				.ok()
 				.body(classMapper.toClassOutDTO(classService.updateClass(classInDTO, id)));
+	}
+
+	@PatchMapping("/{id}")
+	public ResponseEntity<ClassOutDTO> patchClass(@PathVariable long id,
+	                                              @RequestBody ClassSpellInDTO spellsDTO) {
+
+		return ResponseEntity
+				.ok()
+				.body(classMapper.toClassOutDTO(classService.updateClassSpells(spellsDTO, id)));
 	}
 
 	@DeleteMapping("/{id}")
