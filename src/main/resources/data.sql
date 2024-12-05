@@ -1,12 +1,48 @@
-INSERT INTO classes (name) VALUES ('Mago');
-INSERT INTO classes (name) VALUES ('Clérigo');
-INSERT INTO classes (name) VALUES ('Bardo');
-INSERT INTO classes (name) VALUES ('Guerrero');
-INSERT INTO classes (name) VALUES ('Pícaro');
-INSERT INTO classes (name) VALUES ('Hechicero');
-INSERT INTO classes (name) VALUES ('Druida');
-INSERT INTO classes (name) VALUES ('Paladín');
-INSERT INTO classes (name) VALUES ('Monje');
+INSERT INTO classes (name, description, simple_description)
+VALUES ('Mago',
+        'Los magos son los practicantes supremos de la magia, definidos y unidos como una clase por los hechizos que conjuran. A partir de la sutil onda de la magia que impregna el cosmos, los magos lanzan explosivos hechizos de fuego, arcos voltaicos, sutiles engaños y brutales formas de control mental.',
+        'Los magos son los practicantes supremos de la magia, definidos y unidos como una clase por los hechizos que conjuran. A partir de la sutil onda de la magia que impregna el cosmos, los magos lanzan explosivos hechizos de fuego, arcos voltaicos, sutiles engaños y brutales formas de control mental.');
+
+INSERT INTO classes (name, description, simple_description)
+VALUES ('Clérigo',
+        'Los clérigos son intermediarios entre el mundo mortal y las distantes esferas de los dioses. A través de la devoción a una deidad o un ideal divino, canalizan poderosas energías mágicas para curar, proteger y destruir.',
+        'Intermediarios entre los dioses y los mortales, canalizan magia divina para curar, proteger y combatir.');
+
+INSERT INTO classes (name, description, simple_description)
+VALUES ('Bardo',
+        'Los bardos son músicos, poetas y artistas consumados que canalizan la magia a través de su creatividad. Ya sea inspirando aliados, desmoralizando enemigos o desatando hechizos, los bardos son tan versátiles como encantadores.',
+        'Músicos mágicos y artistas versátiles que inspiran aliados y lanzan hechizos.');
+
+INSERT INTO classes (name, description, simple_description)
+VALUES ('Guerrero',
+        'Los guerreros son maestros del combate, capaces de manejar cualquier tipo de arma o armadura con destreza. En la batalla, su entrenamiento y habilidades los convierten en una fuerza imparable.',
+        'Maestros del combate y las armas, letales en cualquier enfrentamiento.');
+
+INSERT INTO classes (name, description, simple_description)
+VALUES ('Pícaro',
+        'Los pícaros son expertos en habilidades y engaños, capaces de moverse sigilosamente, desactivar trampas y encontrar debilidades en sus enemigos. Su astucia y precisión los convierten en adversarios formidables.',
+        'Expertos en habilidades y engaños, letales con precisión y astucia.');
+
+INSERT INTO classes (name, description, simple_description)
+VALUES ('Hechicero',
+        'Los hechiceros son individuos bendecidos (o maldecidos) con una conexión innata con la magia. Canalizan poderes arcanos a través de su voluntad, liberando energías mágicas con un estilo único.',
+        'Portadores innatos de magia, liberan poder arcano con pura voluntad.');
+
+INSERT INTO classes (name, description, simple_description)
+VALUES ('Druida',
+        'Los druidas son guardianes de la naturaleza, capaces de transformarse en animales, controlar los elementos y sanar a los heridos. Su magia fluye desde el propio equilibrio del mundo natural.',
+        'Guardianes de la naturaleza, transforman cuerpos y controlan elementos.');
+
+INSERT INTO classes (name, description, simple_description)
+VALUES ('Paladín',
+        'Los paladines son campeones sagrados de la justicia, juramentados a defender los ideales de su fe. Combinan habilidades marciales y magia divina para derrotar al mal.',
+        'Campeones sagrados que combinan combate y magia divina.');
+
+INSERT INTO classes (name, description, simple_description)
+VALUES ('Monje',
+        'Los monjes son maestros de la disciplina corporal y espiritual, canalizando una energía mágica conocida como ki para realizar hazañas sobrehumanas en combate y más allá.',
+        'Maestros de la disciplina y el ki, con habilidades sobrehumanas.');
+
 
 INSERT INTO spells (name, magic_school, level, description, casting_time, spell_range, components, materials, duration, ritual, concentration, high_levels_description, source)
 VALUES ('Bola de Fuego', 'EVOCACION', 3, 'Un hechizo de daño masivo en un área', '1 acción', '40 pies', 'V, S', 'azufre', 'Instantáneo', TRUE, FALSE, 'Descripción adicional para niveles superiores', 'SRD');

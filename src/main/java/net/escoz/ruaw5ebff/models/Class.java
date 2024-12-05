@@ -23,6 +23,9 @@ public class Class {
 	@Column(length = 4000)
 	private String description;
 
+	@Column(length = 300)
+	private String simpleDescription;
+
 	@OrderBy("name ASC")
 	@ManyToMany(mappedBy = "classes")
 	private Set<Spell> spells = new LinkedHashSet<>();

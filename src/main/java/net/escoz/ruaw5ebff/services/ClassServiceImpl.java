@@ -6,11 +6,18 @@ import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.repositories.ClassRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ClassServiceImpl implements ClassService {
 
 	private final ClassRepository classRepository;
+
+	@Override
+	public List<Class> getClasses() {
+		return classRepository.findAll();
+	}
 
 	@Override
 	public Class findClass(Long id) {

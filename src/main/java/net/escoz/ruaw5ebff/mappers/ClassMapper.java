@@ -1,6 +1,7 @@
 package net.escoz.ruaw5ebff.mappers;
 
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassLevelOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassMinOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellOutDTO;
 import net.escoz.ruaw5ebff.models.Class;
@@ -18,6 +19,8 @@ public interface ClassMapper {
 
 	@Mapping(source = "classLevels", target = "levels")
 	ClassOutDTO toClassOutDTO(Class clazz);
+
+	ClassMinOutDTO toClassMinOutDTO(Class clazz);
 
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
