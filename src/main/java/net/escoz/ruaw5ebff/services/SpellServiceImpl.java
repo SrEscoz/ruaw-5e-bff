@@ -15,6 +15,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class SpellServiceImpl implements SpellService {
@@ -27,6 +29,11 @@ public class SpellServiceImpl implements SpellService {
 		Specification<Spell> spec = SpellSpecification.fromFilter(filters);
 
 		return spellRepository.findAll(spec, pageable);
+	}
+
+	@Override
+	public List<Spell> findSpellsByClass(long id) {
+		return spellRepository.findAllByClassId(id);
 	}
 
 	@Override

@@ -8,10 +8,7 @@ import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.services.ClassService;
 import net.escoz.ruaw5ebff.utils.Utils;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 
 import java.util.List;
 import java.util.Set;
@@ -21,6 +18,13 @@ import java.util.stream.Collectors;
 public interface SpellMapper {
 
 	SpellOutDTO toSpellOutDTO(Spell spell);
+
+	@BeanMapping(ignoreByDefault = true)
+	@Mapping(source = "id", target = "id")
+	@Mapping(source = "name", target = "name")
+	@Mapping(source = "level", target = "level")
+	@Mapping(source = "magicSchool", target = "magicSchool")
+	SpellOutDTO toSpellMinDTO(Spell spell);
 
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "name", source = "name", qualifiedByName = "sanitizeName")

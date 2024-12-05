@@ -48,10 +48,15 @@ public class SpellController {
 				.body(spellMapper.toSpellOutDTO(spellService.findById(id)));
 	}
 
-	@GetMapping("/class/{id}")
+	@GetMapping("/classes/{id}")
 	public ResponseEntity<List<SpellOutDTO>> getClassSpells(@PathVariable long id) {
+		List<SpellOutDTO> spells = spellService.findSpellsByClass(id).stream()
+				.map(spellMapper::toSpellMinDTO)
+				.toList();
 
-		return null;
+		return ResponseEntity
+				.ok()
+				.body(spells);
 	}
 
 	@PostMapping
