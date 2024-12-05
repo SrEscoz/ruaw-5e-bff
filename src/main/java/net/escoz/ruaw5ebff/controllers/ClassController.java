@@ -51,6 +51,15 @@ public class ClassController {
 				.body(classMapper.toClassOutDTO(classService.addClass(clazz)));
 	}
 
+	@PutMapping("/{id}")
+	public ResponseEntity<ClassOutDTO> updateClass(@PathVariable Long id,
+	                                               @Valid @RequestBody ClassInDTO classInDTO) {
+
+		return ResponseEntity
+				.ok()
+				.body(classMapper.toClassOutDTO(classService.updateClass(classInDTO, id)));
+	}
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<BasicOutDTO> deleteClass(@PathVariable long id) {
 		classService.deleteClass(id);

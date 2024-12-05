@@ -9,10 +9,7 @@ import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.ClassLevel;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.utils.Utils;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Named;
+import org.mapstruct.*;
 
 import java.util.List;
 import java.util.Set;
@@ -36,6 +33,12 @@ public interface ClassMapper {
 	@Mapping(source = "name", target = "name")
 	@Mapping(source = "level", target = "level")
 	SpellOutDTO toSpellMinimalDTO(Spell spell);
+
+	@Mapping(target = "id", ignore = true)
+	@Mapping(target = "spells", ignore = true)
+	@Mapping(target = "classLevels", ignore = true)
+	@Mapping(target = "name", source = "name", qualifiedByName = "sanitizeName")
+	Class updateClass(@MappingTarget Class clazz, ClassInDTO classInDTO);
 
 	ClassLevelOutDTO toClassLevelDTO(ClassLevel classLevel);
 
