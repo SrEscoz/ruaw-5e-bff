@@ -1,7 +1,7 @@
 package net.escoz.ruaw5ebff.repositories.specifications;
 
 import jakarta.persistence.criteria.Join;
-import net.escoz.ruaw5ebff.controllers.dtos.SpellFilterDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellFilterDTO;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;

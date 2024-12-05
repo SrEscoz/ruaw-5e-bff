@@ -1,12 +1,14 @@
 package net.escoz.ruaw5ebff.mappers;
 
-import net.escoz.ruaw5ebff.controllers.dtos.ClassLevelOutDTO;
-import net.escoz.ruaw5ebff.controllers.dtos.ClassOutDTO;
-import net.escoz.ruaw5ebff.controllers.dtos.SpellOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassLevelOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellOutDTO;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.ClassLevel;
 import net.escoz.ruaw5ebff.models.Spell;
-import org.mapstruct.*;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.List;
 import java.util.Set;

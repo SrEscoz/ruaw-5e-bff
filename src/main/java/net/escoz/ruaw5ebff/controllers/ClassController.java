@@ -1,7 +1,7 @@
 package net.escoz.ruaw5ebff.controllers;
 
 import lombok.AllArgsConstructor;
-import net.escoz.ruaw5ebff.controllers.dtos.ClassOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassOutDTO;
 import net.escoz.ruaw5ebff.mappers.ClassMapper;
 import net.escoz.ruaw5ebff.services.ClassService;
 import org.springframework.http.ResponseEntity;

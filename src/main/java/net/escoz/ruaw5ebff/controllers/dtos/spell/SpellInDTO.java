@@ -1,4 +1,4 @@
-package net.escoz.ruaw5ebff.controllers.dtos;
+package net.escoz.ruaw5ebff.controllers.dtos.spell;
 
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;

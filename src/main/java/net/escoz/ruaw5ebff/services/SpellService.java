@@ -1,7 +1,7 @@
 package net.escoz.ruaw5ebff.services;
 
-import net.escoz.ruaw5ebff.controllers.dtos.SpellFilterDTO;
-import net.escoz.ruaw5ebff.controllers.dtos.SpellInDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellFilterDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellInDTO;
 import net.escoz.ruaw5ebff.models.Spell;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

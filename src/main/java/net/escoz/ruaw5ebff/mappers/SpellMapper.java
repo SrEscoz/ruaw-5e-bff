@@ -1,8 +1,8 @@
 package net.escoz.ruaw5ebff.mappers;
 
 
-import net.escoz.ruaw5ebff.controllers.dtos.SpellInDTO;
-import net.escoz.ruaw5ebff.controllers.dtos.SpellOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellInDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellOutDTO;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.models.Spell;

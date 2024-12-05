@@ -1,4 +1,4 @@
-package net.escoz.ruaw5ebff.controllers.dtos;
+package net.escoz.ruaw5ebff.controllers.dtos.spell;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

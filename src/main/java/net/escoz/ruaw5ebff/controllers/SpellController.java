@@ -2,7 +2,11 @@ package net.escoz.ruaw5ebff.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import net.escoz.ruaw5ebff.controllers.dtos.*;
+import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.PageOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellFilterDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellInDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellOutDTO;
 import net.escoz.ruaw5ebff.mappers.SpellMapper;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.services.SpellService;

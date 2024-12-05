@@ -1,4 +1,4 @@
-package net.escoz.ruaw5ebff.controllers.dtos;
+package net.escoz.ruaw5ebff.controllers.dtos.clazz;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

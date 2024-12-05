@@ -20,6 +20,9 @@ public class Class {
 	@Column(unique = true, nullable = false)
 	private String name;
 
+	@Column(length = 4000)
+	private String description;
+
 	@OrderBy("name ASC")
 	@ManyToMany(mappedBy = "classes")
 	private Set<Spell> spells = new LinkedHashSet<>();
