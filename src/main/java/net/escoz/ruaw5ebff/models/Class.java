@@ -26,6 +26,18 @@ public class Class {
 	@Column(length = 300)
 	private String simpleDescription;
 
+	private String source;
+
+	private String hitDice;
+
+	private String magicalAptitude;
+
+	private String multiClassRequisite;
+
+	private Boolean castsKnown;
+
+	private Boolean castPrepared;
+
 	@OrderBy("name ASC")
 	@ManyToMany(mappedBy = "classes")
 	private Set<Spell> spells = new LinkedHashSet<>();

@@ -15,6 +15,12 @@ public final class ClassOutDTO {
 	private long id;
 	private String name;
 	private String description;
+	private String source;
+	private String hitDice;
+	private String magicalAptitude;
+	private String multiClassRequisite;
+	private boolean castsKnown;
+	private boolean castPrepared;
 	private List<SpellOutDTO> spells;
 	private List<ClassLevelOutDTO> levels;
 }
