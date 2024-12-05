@@ -16,7 +16,7 @@ public class ClassServiceImpl implements ClassService {
 
 	@Override
 	public List<Class> getClasses() {
-		return classRepository.findAll();
+		return classRepository.findAllByOrderByNameAsc();
 	}
 
 	@Override
