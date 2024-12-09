@@ -13,6 +13,8 @@ import java.util.Optional;
 public interface SpellRepository extends JpaRepository<Spell, Long>, JpaSpecificationExecutor<Spell> {
 	Optional<Spell> findByName(String name);
 
+	Optional<Spell> findBySlug(String slug);
+
 	@Query("SELECT s FROM Spell s JOIN s.classes c WHERE c.id = :id ORDER BY s.name")
 	List<Spell> findAllByClassId(long id);
 

@@ -43,6 +43,12 @@ public class SpellServiceImpl implements SpellService {
 	}
 
 	@Override
+	public Spell findBySlug(String slug) {
+		return spellRepository.findBySlug(slug)
+				.orElseThrow(() -> new SpellNotFoundException(slug));
+	}
+
+	@Override
 	public Spell saveSpell(Spell spell) {
 		spellRepository.findByName(spell.getName())
 				.ifPresent(s -> {
@@ -66,7 +72,6 @@ public class SpellServiceImpl implements SpellService {
 
 		return spellRepository.save(spell);
 	}
-
 
 	@Override
 	public void deleteSpell(long id) {

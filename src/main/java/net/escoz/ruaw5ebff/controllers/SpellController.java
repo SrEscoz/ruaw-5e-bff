@@ -41,11 +41,21 @@ public class SpellController {
 				.body(response);
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<SpellOutDTO> getSpell(@PathVariable long id) {
+	@GetMapping("/{identifier}")
+	public ResponseEntity<SpellOutDTO> getSpell(@PathVariable String identifier) {
+		Spell spell;
+
+		try {
+			long id = Long.parseLong(identifier);
+			spell = spellService.findById(id);
+
+		} catch (NumberFormatException e) {
+			spell = spellService.findBySlug(identifier);
+		}
+
 		return ResponseEntity
 				.ok()
-				.body(spellMapper.toSpellOutDTO(spellService.findById(id)));
+				.body(spellMapper.toSpellOutDTO(spell));
 	}
 
 	@GetMapping("/classes/{id}")

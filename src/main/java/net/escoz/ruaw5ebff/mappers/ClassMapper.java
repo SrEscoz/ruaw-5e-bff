@@ -31,6 +31,7 @@ public interface ClassMapper {
 	@BeanMapping(ignoreByDefault = true)
 	@Mapping(source = "id", target = "id")
 	@Mapping(source = "name", target = "name")
+	@Mapping(source = "slug", target = "slug")
 	@Mapping(source = "level", target = "level")
 	SpellOutDTO toSpellMinimalDTO(Spell spell);
 

@@ -17,7 +17,11 @@ public class Spell {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(unique = true, nullable = false)
 	private String name;
+
+	@Column(unique = true)
+	private String slug;
 
 	@Column(length = 50)
 	@Enumerated(EnumType.STRING)

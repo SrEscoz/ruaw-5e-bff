@@ -15,6 +15,7 @@ public final class SpellOutDTO {
 
 	private long id;
 	private String name;
+	private String slug;
 	private String magicSchool;
 	private int level;
 	private String description;

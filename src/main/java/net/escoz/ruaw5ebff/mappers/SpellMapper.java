@@ -28,10 +28,12 @@ public interface SpellMapper {
 
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "name", source = "name", qualifiedByName = "sanitizeName")
+	@Mapping(target = "slug", source = "name", qualifiedByName = "generateSlug")
 	Spell toEntity(SpellInDTO spellInDTO);
 
 	@Mapping(target = "id", ignore = true)
 	@Mapping(target = "name", source = "name", qualifiedByName = "sanitizeName")
+	@Mapping(target = "slug", source = "name", qualifiedByName = "generateSlug")
 	Spell updateSpell(@MappingTarget Spell originalSpell, SpellInDTO spell);
 
 	default String mapEnumToString(MagicSchool magicSchool) {
@@ -49,5 +51,10 @@ public interface SpellMapper {
 	@Named("sanitizeName")
 	default String mapCapitalizedName(String s) {
 		return Utils.sanitizeName(s);
+	}
+
+	@Named("generateSlug")
+	default String mapSlug(String s) {
+		return Utils.generateSlug(s);
 	}
 }

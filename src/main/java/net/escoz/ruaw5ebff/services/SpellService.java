@@ -16,6 +16,8 @@ public interface SpellService {
 
 	Spell findById(long id);
 
+	Spell findBySlug(String slug);
+
 	Spell saveSpell(Spell spell);
 
 	Spell updateSpell(SpellInDTO spellInDTO, long id);
