@@ -3,7 +3,9 @@ package net.escoz.ruaw5ebff.controllers;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.TokenOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.user.UserInDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.user.UserLoginDTO;
 import net.escoz.ruaw5ebff.mappers.UserMapper;
 import net.escoz.ruaw5ebff.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -30,4 +32,12 @@ public class AuthController {
 				.body(new BasicOutDTO(HttpStatus.CREATED.value(), "Usuario registrado con éxito"));
 	}
 
+	@PostMapping("/login")
+	public ResponseEntity<TokenOutDTO> loginUser(@RequestBody UserLoginDTO userLoginDTO) {
+		String token = userService.loginUser(userLoginDTO);
+
+		return ResponseEntity
+				.ok()
+				.body(new TokenOutDTO(HttpStatus.OK.value(), token));
+	}
 }

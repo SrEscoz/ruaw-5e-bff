@@ -16,3 +16,7 @@ spring:
       mode: never
 ruaw:
   allowed-origin: http://localhost:4200
+security:
+  jwt:
+    secret-key: c5cce0a3980ae936bbb7ec9c526f4057043c28b0da0bbb5caca7b713ad2de9df
+    expiration-time: 3600000
