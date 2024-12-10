@@ -1,4 +1,4 @@
-package net.escoz.ruaw5ebff.services;
+package net.escoz.ruaw5ebff.services.impl;
 
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.controllers.dtos.spell.SpellFilterDTO;
@@ -9,6 +9,7 @@ import net.escoz.ruaw5ebff.mappers.SpellMapper;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.repositories.SpellRepository;
 import net.escoz.ruaw5ebff.repositories.specifications.SpellSpecification;
+import net.escoz.ruaw5ebff.services.SpellService;
 import net.escoz.ruaw5ebff.utils.Utils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

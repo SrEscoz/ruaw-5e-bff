@@ -1,8 +1,9 @@
-package net.escoz.ruaw5ebff.services;
+package net.escoz.ruaw5ebff.services.impl;
 
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.models.MagicSchool;
 import net.escoz.ruaw5ebff.repositories.MetadataRepository;
+import net.escoz.ruaw5ebff.services.MetadataService;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package net.escoz.ruaw5ebff.services;
+package net.escoz.ruaw5ebff.services.impl;
 
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.controllers.dtos.clazz.ClassInDTO;
@@ -9,6 +9,8 @@ import net.escoz.ruaw5ebff.mappers.ClassMapper;
 import net.escoz.ruaw5ebff.models.Class;
 import net.escoz.ruaw5ebff.models.Spell;
 import net.escoz.ruaw5ebff.repositories.ClassRepository;
+import net.escoz.ruaw5ebff.services.ClassService;
+import net.escoz.ruaw5ebff.services.SpellService;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

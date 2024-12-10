@@ -29,7 +29,11 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 		return buildResponse(exception.getMessage(), HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(value = {SpellConflictException.class, ClassConflictException.class})
+	@ExceptionHandler(value = {
+			SpellConflictException.class,
+			ClassConflictException.class,
+			UserConflictException.class,
+	})
 	protected ResponseEntity<ErrorOutDTO> handleConflictExceptions(Exception exception) {
 		return buildResponse(exception.getMessage(), HttpStatus.CONFLICT);
 	}
