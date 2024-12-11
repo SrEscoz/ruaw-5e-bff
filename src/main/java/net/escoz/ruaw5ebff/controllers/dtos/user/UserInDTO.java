@@ -20,8 +20,8 @@ public final class UserInDTO {
 	@NotBlank(message = "La contraseña no puede estar vacía.")
 	@Size(min = 8, message = "La contraseña debe tener al menos 8 caracteres.")
 	@Pattern(
-			regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=]).*$",
-			message = "La contraseña debe contener al menos una letra mayúscula, una minúscula, un número y un carácter especial."
+			regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).*$",
+			message = "La contraseña debe contener al menos una letra mayúscula, una minúscula y un número."
 	)
 	private String password;
 
