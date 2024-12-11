@@ -1,8 +1,8 @@
 package net.escoz.ruaw5ebff.controllers;
 
 import net.escoz.ruaw5ebff.controllers.dtos.ErrorOutDTO;
-import net.escoz.ruaw5ebff.exceptions.*;
 import net.escoz.ruaw5ebff.exceptions.ClassNotFoundException;
+import net.escoz.ruaw5ebff.exceptions.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -10,14 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.time.Instant;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(value = {
@@ -36,6 +36,14 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 	})
 	protected ResponseEntity<ErrorOutDTO> handleConflictExceptions(Exception exception) {
 		return buildResponse(exception.getMessage(), HttpStatus.CONFLICT);
+	}
+
+	@ExceptionHandler(value = {
+			InvalidTokenException.class,
+			AppUserException.class
+	})
+	protected ResponseEntity<ErrorOutDTO> handleBadCredentialsException(Exception exception) {
+		return buildResponse(exception.getMessage(), HttpStatus.UNAUTHORIZED);
 	}
 
 	@Override

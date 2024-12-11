@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.configurations.security.AppUserDetailService;
 import net.escoz.ruaw5ebff.configurations.security.JwtService;
 import net.escoz.ruaw5ebff.controllers.dtos.user.UserLoginDTO;
+import net.escoz.ruaw5ebff.exceptions.AppUserException;
 import net.escoz.ruaw5ebff.exceptions.UserConflictException;
 import net.escoz.ruaw5ebff.models.AppUser;
 import net.escoz.ruaw5ebff.repositories.UserRepository;
@@ -11,6 +12,7 @@ import net.escoz.ruaw5ebff.services.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,14 +33,19 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public String loginUser(UserLoginDTO loginDTO) {
-		Authentication authentication = authenticationManager.authenticate(
-				new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
-		);
+		try {
+			Authentication authentication = authenticationManager.authenticate(
+					new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
+			);
 
-		if (authentication.isAuthenticated()) {
-			return jwtService.generateToken(appUserDetailService.loadUserByUsername(loginDTO.getUsername()));
-		} else {
-			throw new UserConflictException("Usuario o contraseña incorrecta");
+			if (authentication.isAuthenticated()) {
+				return jwtService.generateToken(appUserDetailService.loadUserByUsername(loginDTO.getUsername()));
+			} else {
+				throw new AppUserException("Usuario o contraseña incorrecta");
+			}
+
+		} catch (AuthenticationException ex) {
+			throw new AppUserException("Usuario o contraseña incorrecta");
 		}
 	}
 
