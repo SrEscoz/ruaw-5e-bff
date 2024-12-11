@@ -2,6 +2,7 @@ package net.escoz.ruaw5ebff.controllers;
 
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import net.escoz.ruaw5ebff.configurations.security.JwtService;
 import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.TokenOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.user.UserInDTO;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
 	private final UserService userService;
+	private final JwtService jwtService;
 	private final UserMapper userMapper;
 
 	@PostMapping("/register")
@@ -38,6 +40,6 @@ public class AuthController {
 
 		return ResponseEntity
 				.ok()
-				.body(new TokenOutDTO(HttpStatus.OK.value(), token));
+				.body(new TokenOutDTO(HttpStatus.OK.value(), token, jwtService.getExpiration()));
 	}
 }

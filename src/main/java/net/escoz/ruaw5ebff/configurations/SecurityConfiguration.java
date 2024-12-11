@@ -1,6 +1,7 @@
 package net.escoz.ruaw5ebff.configurations;
 
 import lombok.AllArgsConstructor;
+import net.escoz.ruaw5ebff.configurations.security.JwtAuthFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -22,6 +24,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfiguration {
 
 	private final UserDetailsService userDetailsService;
+	private final JwtAuthFilter jwtAuthFilter;
 
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -29,10 +32,10 @@ public class SecurityConfiguration {
 				.csrf(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(registry ->
 						registry.requestMatchers("/auth/**").permitAll()
-								.requestMatchers(HttpMethod.GET, "/**").permitAll()
-								.requestMatchers("/**").authenticated()
+								.requestMatchers(HttpMethod.GET).permitAll()
 								.anyRequest().authenticated()
 				)
+				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
 				.build();
 	}
 
