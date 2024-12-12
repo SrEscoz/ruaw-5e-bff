@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
@@ -33,12 +34,18 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
 		String authHeader = request.getHeader("Authorization");
 
+		if (CorsUtils.isPreFlightRequest(request)) {
+			filterChain.doFilter(request, response);
+			return;
+		}
+
 		if (request.getMethod().equals("GET") || request.getContextPath().equals("/auth")) {
 			filterChain.doFilter(request, response);
 			return;
 		}
 
 		if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+			response.setStatus(HttpServletResponse.SC_OK);
 			filterChain.doFilter(request, response);
 			return;
 		}
