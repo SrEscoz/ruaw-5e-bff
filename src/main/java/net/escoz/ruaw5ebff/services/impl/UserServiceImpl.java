@@ -1,5 +1,7 @@
 package net.escoz.ruaw5ebff.services.impl;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.JwtException;
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.configurations.security.AppUserDetailService;
 import net.escoz.ruaw5ebff.configurations.security.JwtService;
@@ -13,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -46,6 +49,27 @@ public class UserServiceImpl implements UserService {
 
 		} catch (AuthenticationException ex) {
 			throw new AppUserException("Usuario o contraseña incorrecta");
+		}
+	}
+
+	@Override
+	public String refreshToken(String token) {
+		try {
+			String username = jwtService.extractUsername(token);
+
+			if (username != null) {
+				UserDetails userDetails = appUserDetailService.loadUserByUsername(username);
+
+				return jwtService.generateToken(userDetails);
+
+			} else {
+				throw new AppUserException("El token contiene un usuario no válido");
+			}
+
+		} catch (ExpiredJwtException ex) {
+			throw new AppUserException("El token ha expirado");
+		} catch (JwtException ex) {
+			throw new AppUserException("El token no es válido");
 		}
 	}
 

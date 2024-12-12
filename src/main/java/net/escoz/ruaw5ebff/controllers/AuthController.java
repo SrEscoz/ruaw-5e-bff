@@ -7,6 +7,7 @@ import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.TokenOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.user.UserInDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.user.UserLoginDTO;
+import net.escoz.ruaw5ebff.controllers.dtos.user.UserTokenInDTO;
 import net.escoz.ruaw5ebff.mappers.UserMapper;
 import net.escoz.ruaw5ebff.services.UserService;
 import org.springframework.http.HttpStatus;
@@ -35,11 +36,20 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<TokenOutDTO> loginUser(@RequestBody UserLoginDTO userLoginDTO) {
+	public ResponseEntity<TokenOutDTO> loginUser(@Valid @RequestBody UserLoginDTO userLoginDTO) {
 		String token = userService.loginUser(userLoginDTO);
 
 		return ResponseEntity
 				.ok()
 				.body(new TokenOutDTO(HttpStatus.OK.value(), token, jwtService.getExpiration()));
+	}
+
+	@PostMapping("/refresh-token")
+	public ResponseEntity<TokenOutDTO> refreshToken(@Valid @RequestBody UserTokenInDTO userTokenInDTO) {
+		String newToken = userService.refreshToken(userTokenInDTO.getToken());
+
+		return ResponseEntity
+				.ok()
+				.body(new TokenOutDTO(HttpStatus.OK.value(), newToken, jwtService.getExpiration()));
 	}
 }

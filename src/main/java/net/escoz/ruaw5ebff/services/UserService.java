@@ -8,4 +8,6 @@ public interface UserService {
 	void registerUser(AppUser user);
 
 	String loginUser(UserLoginDTO loginDTO);
+
+	String refreshToken(String token);
 }
