@@ -16,7 +16,18 @@ public class AppUserDetailService implements UserDetailsService {
 	private final UserRepository userRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		AppUser user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException(email));
+
+		return User.builder()
+				.username(user.getUsername())
+				.password(user.getPassword())
+				.roles(getRoles(user.getRoles()))
+				.build();
+	}
+
+	public UserDetails loadUserByJwtUsername(String username) throws UsernameNotFoundException {
 		AppUser user = userRepository.findByUsername(username)
 				.orElseThrow(() -> new UsernameNotFoundException(username));
 

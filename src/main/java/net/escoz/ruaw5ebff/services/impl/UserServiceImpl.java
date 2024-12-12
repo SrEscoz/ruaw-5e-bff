@@ -38,17 +38,17 @@ public class UserServiceImpl implements UserService {
 	public String loginUser(UserLoginDTO loginDTO) {
 		try {
 			Authentication authentication = authenticationManager.authenticate(
-					new UsernamePasswordAuthenticationToken(loginDTO.getUsername(), loginDTO.getPassword())
+					new UsernamePasswordAuthenticationToken(loginDTO.getEmail(), loginDTO.getPassword())
 			);
 
 			if (authentication.isAuthenticated()) {
-				return jwtService.generateToken(appUserDetailService.loadUserByUsername(loginDTO.getUsername()));
+				return jwtService.generateToken(appUserDetailService.loadUserByUsername(loginDTO.getEmail()));
 			} else {
-				throw new AppUserException("Usuario o contraseña incorrecta");
+				throw new AppUserException("Email o contraseña incorrecta");
 			}
 
 		} catch (AuthenticationException ex) {
-			throw new AppUserException("Usuario o contraseña incorrecta");
+			throw new AppUserException("Email o contraseña incorrecta");
 		}
 	}
 
@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
 			String username = jwtService.extractUsername(token);
 
 			if (username != null) {
-				UserDetails userDetails = appUserDetailService.loadUserByUsername(username);
+				UserDetails userDetails = appUserDetailService.loadUserByJwtUsername(username);
 
 				return jwtService.generateToken(userDetails);
 
