@@ -10,6 +10,7 @@ import net.escoz.ruaw5ebff.exceptions.InvalidTokenException;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -18,6 +19,7 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 
 import java.io.IOException;
+import java.util.Collections;
 
 @Configuration
 @AllArgsConstructor
@@ -35,11 +37,19 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 		String authHeader = request.getHeader("Authorization");
 
 		if (CorsUtils.isPreFlightRequest(request)) {
+			UsernamePasswordAuthenticationToken fakeAuthentication = new UsernamePasswordAuthenticationToken(
+					"anonymousUser",
+					null,
+					Collections.singletonList(new SimpleGrantedAuthority("ROLE_ANONYMOUS"
+					)));
+
+
+			SecurityContextHolder.getContext().setAuthentication(fakeAuthentication);
 			filterChain.doFilter(request, response);
 			return;
 		}
 
-		if (request.getMethod().equals("GET") || request.getContextPath().equals("/auth")) {
+		if (request.getMethod().equals("GET") || request.getRequestURI().contains("/auth")) {
 			filterChain.doFilter(request, response);
 			return;
 		}

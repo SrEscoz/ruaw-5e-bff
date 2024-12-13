@@ -33,7 +33,6 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(registry ->
 						registry.requestMatchers("/auth/**").permitAll()
 								.requestMatchers(HttpMethod.GET).permitAll()
-								.requestMatchers(HttpMethod.OPTIONS).permitAll()
 								.anyRequest().authenticated()
 				)
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
