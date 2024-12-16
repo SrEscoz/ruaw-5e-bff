@@ -2,6 +2,7 @@ package net.escoz.ruaw5ebff.configurations;
 
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.configurations.security.JwtAuthFilter;
+import net.escoz.ruaw5ebff.exceptions.UserUnauthorizedException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -17,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.HandlerExceptionResolver;
 
 @Configuration
 @EnableWebSecurity
@@ -24,6 +26,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfiguration {
 
 	private final UserDetailsService userDetailsService;
+	private final HandlerExceptionResolver handlerExceptionResolver;
 	private final JwtAuthFilter jwtAuthFilter;
 
 	@Bean
@@ -33,9 +36,20 @@ public class SecurityConfiguration {
 				.authorizeHttpRequests(registry ->
 						registry.requestMatchers("/auth/**").permitAll()
 								.requestMatchers(HttpMethod.GET).permitAll()
-								.anyRequest().authenticated()
+								.anyRequest().hasRole("ADMIN")
 				)
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+				.exceptionHandling(exceptionHandling ->
+						exceptionHandling
+								.accessDeniedHandler((request, response, accessDeniedException) -> {
+									UserUnauthorizedException invalidTokenException = new UserUnauthorizedException("Acceso denegado: no tienes los permisos suficientes");
+									handlerExceptionResolver.resolveException(request, response, null, invalidTokenException);
+								})
+								.authenticationEntryPoint((request, response, authException) -> {
+									UserUnauthorizedException invalidTokenException = new UserUnauthorizedException("Acceso denegado: credenciales no válidas");
+									handlerExceptionResolver.resolveException(request, response, null, invalidTokenException);
+								})
+				)
 				.build();
 	}
 

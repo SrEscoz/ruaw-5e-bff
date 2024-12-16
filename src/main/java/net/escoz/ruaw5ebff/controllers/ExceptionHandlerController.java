@@ -40,7 +40,8 @@ public class ExceptionHandlerController extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(value = {
 			InvalidTokenException.class,
-			AppUserException.class
+			AppUserException.class,
+			UserUnauthorizedException.class
 	})
 	protected ResponseEntity<ErrorOutDTO> handleBadCredentialsException(Exception exception) {
 		return buildResponse(exception.getMessage(), HttpStatus.UNAUTHORIZED);
