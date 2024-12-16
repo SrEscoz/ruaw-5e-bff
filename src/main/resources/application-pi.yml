@@ -1,8 +1,8 @@
 spring:
   datasource:
     url: jdbc:mariadb://mariadb.escoz.net:3570/RUAW5e
-    username: escoz-multi
-    password: escoz-multi
+    username:
+    password:
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
