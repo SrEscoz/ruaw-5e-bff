@@ -3,7 +3,6 @@ package net.escoz.ruaw5ebff.controllers;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.configurations.security.JwtService;
-import net.escoz.ruaw5ebff.controllers.dtos.BasicOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.TokenOutDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.user.UserInDTO;
 import net.escoz.ruaw5ebff.controllers.dtos.user.UserLoginDTO;
@@ -27,12 +26,13 @@ public class AuthController {
 	private final UserMapper userMapper;
 
 	@PostMapping("/register")
-	public ResponseEntity<BasicOutDTO> registerUser(@Valid @RequestBody UserInDTO userInDTO) {
+	public ResponseEntity<TokenOutDTO> registerUser(@Valid @RequestBody UserInDTO userInDTO) {
 		userService.registerUser(userMapper.toEntity(userInDTO));
+		String token = userService.loginUser(new UserLoginDTO(userInDTO.getEmail(), userInDTO.getPassword()));
 
 		return ResponseEntity
 				.status(HttpStatus.CREATED)
-				.body(new BasicOutDTO(HttpStatus.CREATED.value(), "Usuario registrado con éxito"));
+				.body(new TokenOutDTO(HttpStatus.CREATED.value(), token, jwtService.getExpiration()));
 	}
 
 	@PostMapping("/login")

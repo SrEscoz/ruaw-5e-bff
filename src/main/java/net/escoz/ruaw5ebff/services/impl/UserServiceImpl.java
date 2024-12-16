@@ -2,6 +2,7 @@ package net.escoz.ruaw5ebff.services.impl;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import net.escoz.ruaw5ebff.configurations.security.AppUserDetailService;
 import net.escoz.ruaw5ebff.configurations.security.JwtService;
@@ -29,6 +30,7 @@ public class UserServiceImpl implements UserService {
 	private final AuthenticationManager authenticationManager;
 
 	@Override
+	@Transactional
 	public void registerUser(AppUser user) {
 		checkDuplicated(user);
 		userRepository.save(user);
