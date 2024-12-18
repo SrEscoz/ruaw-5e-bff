@@ -13,6 +13,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.ExceptionHandlingConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -39,18 +40,20 @@ public class SecurityConfiguration {
 								.anyRequest().hasRole("ADMIN")
 				)
 				.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-				.exceptionHandling(exceptionHandling ->
-						exceptionHandling
-								.accessDeniedHandler((request, response, accessDeniedException) -> {
-									UserUnauthorizedException invalidTokenException = new UserUnauthorizedException("Acceso denegado: no tienes los permisos suficientes");
-									handlerExceptionResolver.resolveException(request, response, null, invalidTokenException);
-								})
-								.authenticationEntryPoint((request, response, authException) -> {
-									UserUnauthorizedException invalidTokenException = new UserUnauthorizedException("Acceso denegado: credenciales no válidas");
-									handlerExceptionResolver.resolveException(request, response, null, invalidTokenException);
-								})
-				)
+				.exceptionHandling(this::configureExceptionHandling)
 				.build();
+	}
+
+	private void configureExceptionHandling(ExceptionHandlingConfigurer<HttpSecurity> exceptionHandling) {
+		exceptionHandling
+				.accessDeniedHandler((request, response, accessDeniedException) -> {
+					UserUnauthorizedException invalidTokenException = new UserUnauthorizedException("Acceso denegado: no tienes los permisos suficientes");
+					handlerExceptionResolver.resolveException(request, response, null, invalidTokenException);
+				})
+				.authenticationEntryPoint((request, response, authException) -> {
+					UserUnauthorizedException invalidTokenException = new UserUnauthorizedException("Acceso denegado: credenciales no válidas");
+					handlerExceptionResolver.resolveException(request, response, null, invalidTokenException);
+				});
 	}
 
 	@Bean
